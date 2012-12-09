@@ -30,8 +30,10 @@ AddGameFunction( "drawtile", function( origin, eventdata ){
 
 AddGameFunction( "discardtile", function( origin, eventdata ){ 
 	var pn = GetPlayerNumber( origin );
-	game.DiscardTile( pn, eventdata ); 
+	game.DiscardTile( pn, eventdata );
+
 	actions = game.GetPossibleActions(playerNumber);
+    console.log(actions);
 	ManageUI(actions);
 	if(pn == playerNumber)
 	{graphics.player.resetPick();}
@@ -126,7 +128,7 @@ AddGameFunction( "join room down", function(data){
 		
 } );
 
-AddGameFunction( "left room down", function(data){ 
+AddGameFunction( "left room down", function(data){
 	if( data['sessionId'] == sessionId ){
 		$("#chat").append( "<p>you have left " + data['roomId'] + "</p>" );
 		$("#joingame").show();
@@ -173,7 +175,6 @@ $(document).ready( function(){
 	ManageUI();
 	$("#joingame").click( function(){ 
 		JoinRoom();
-		
 	} );
 	
 	$("#quitgame").click( function(){ 

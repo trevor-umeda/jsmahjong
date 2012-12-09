@@ -16,29 +16,29 @@ var app = module.exports = express.createServer();
 var io = require('socket.io').listen(app);
 
 // Models communicate with the db through mongoose
-var playerModel = require( "./models/player.js" );
-var Player = playerModel.Player;
+//var playerModel = require( "./models/player.js" );
+//var Player = playerModel.Player;
 
 // Models communicate with the db through mongoose
-var commentModel = require( "./models/comment.js" );
-var Comment = commentModel.Comment;
+//var commentModel = require( "./models/comment.js" );
+//var Comment = commentModel.Comment;
 
 // Password encryption use
-var md5 = require( "MD5" );
+//var md5 = require( "MD5" );
 
 // Shop communication
-var shopModel = require( "./models/shop.js" );
-var Shop = shopModel.InGidioShop;
+//var shopModel = require( "./models/shop.js" );
+//var Shop = shopModel.InGidioShop;
 
 // Javascript rendering engine
 var ejs = require("ejs");
 
 // File service
-var fs = require("fs");
+//var fs = require("fs");
 
 // Custom A/B Test Manager
-var ABTest = require( "./models/abtest.js" );
-var ABTestManager = ABTest.ABTestManager;
+//var ABTest = require( "./models/abtest.js" );
+//var ABTestManager = ABTest.ABTestManager;
 
 /****************************
 * Useful Constants                     *
@@ -77,7 +77,7 @@ app.configure('production', function(){
 
 app.listen(3000);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
-
+console.log("Test");
 app.get('/', function(req, res){
 	var ip = req.connection.remoteAddress;
 	var betaflag = ABTestManager.AddUser(ip);
@@ -490,6 +490,7 @@ io.sockets.on('connection', function(socket){
 	// join channel
 	socket.on( "join channel up", function( channel ){
 		// Step 0: Leave the current channel (if we're in one)
+
 		var oldChan = mychannels.LeaveChannel( socket.id );
 		if( oldChan ){
 			var departureData = { 'sessionId': socket.id };
@@ -564,13 +565,15 @@ io.sockets.on('connection', function(socket){
 	// join room
 	socket.on( "join room up", function( room ){
 		// Step 0: Leave the current room (if we're in one)
+        console.log("Leaving room");
 		var oldRoom = myrooms.LeaveRoom( socket.id );
 		if( oldRoom ){
 			var departureData = { 'sessionId': socket.id };
 			socket.broadcast.to( "room#" + oldRoom ).emit( "left room down", departureData );
 			socket.emit( "left room down", departureData );
 		}
-		
+
+        console.log("joining room");
 		// Step 1: Join the room in the model
 		myrooms.JoinRoom( socket.id, room );
 		

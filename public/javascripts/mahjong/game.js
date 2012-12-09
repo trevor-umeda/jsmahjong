@@ -154,9 +154,10 @@ var MahjongGame = function(){
 			}
 			// check chi for the previous player
 		 
-			var previous = this.players[(parseInt(this.interactivePlayer) + 1 ) % PLAYER_COUNT];
-			if(((parseInt(this.interactivePlayer) + 1 ) % PLAYER_COUNT) == 3)
-				previous.checkChi( tossedtile );
+			var previous = this.players[(parseInt(this.activePlayer) + 1 ) % PLAYER_COUNT];
+			//if(((parseInt(this.activePlayer) + 1 ) % PLAYER_COUNT) == 3)
+
+                previous.checkChi( tossedtile );
 		}
 	}
 	
@@ -189,7 +190,7 @@ var MahjongGame = function(){
 
 	}
 	this.commitChi = function(player,tiles){
-		if(tile != undefined){
+		if(tiles != undefined){
 			this.SetInteractivePlayer(player);
 			currentPlayer = this.players[this.interactivePlayer];
 			result = currentPlayer.chiTile(this.board,tiles);

@@ -87,9 +87,9 @@ var tooltip = function(){
 * Game Client API Code  *
 ***********************/
 // Replace this code with the below for testing use
-//var socket = io.connect('http://localhost');
+var socket = io.connect('http://localhost');
 // The following should be used in production mode
- var socket = io.connect("http://crunchymall.com");
+ //var socket = io.connect("http://crunchymall.com");
 var sessionId;
 
 
@@ -177,6 +177,7 @@ function AddGameFunction( eventname, func ){
 		gameFunctionHandlers[ eventname ] = [];
 	}
 	gameFunctionHandlers[ eventname ].push( func );
+
 }
 
 // Adds a function handler to chat events
@@ -757,8 +758,8 @@ socket.on( "channel stat down", function( data ){
 // Game rooms (just rooms) are where games happen and exist in the during-game
 // player can be the token or the ip address.
 // if no roomid is specified, the server puts the player into the a game randomly
-function JoinRoom( room ){ 
-	socket.emit( "join room up", room, function( result ){ 
+function JoinRoom( room ){
+	socket.emit( "join room up", room, function( result ){
 		// TODO: write me!
 		playerState = STATE_INGAME;		
 	} );
