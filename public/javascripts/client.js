@@ -191,6 +191,7 @@ function AddChatFunction( eventname, func ){
 /**********************
 * User Functions               *
 **********************/
+//Currently not in use. Maybe one day will be though.
 // playerinfo is a json 
 function LoginPlayer( playerinfo ){
 	var data = playerinfo;
@@ -210,7 +211,6 @@ socket.on( "player login down", function(data) {
 	else {
 		// inform player of mistake
 	}
-	// TODO: write code to handle the case when player tokens are false
 });
 
 

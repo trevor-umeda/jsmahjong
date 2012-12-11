@@ -95,6 +95,7 @@ app.get( "/mahjong", function(req, res){
 /****************************
 * Room Models                               *
 *****************************/
+//The concept and logic for a game room is contained here.
 var gamerooms = function(){ 
 	this.rooms = {};
 	this.players = {};
@@ -102,7 +103,15 @@ var gamerooms = function(){
 	this.FirstOpenRoom;
 	this.NextRoomId;
 	this.startFlags = {};
-	
+
+    //Initialization function for the rooms.
+    this.Initialize = function(){
+    		this.rooms[1] = [];
+    		this.FirstOpenRoom = 1;
+    		this.NextRoomId = 2;
+    	}
+
+    //If the room hasn't started yet then mark it down as started.
 	this.StartGame = function(room){ 
 		if( this.startFlags[room] )
 			return false;
@@ -111,7 +120,8 @@ var gamerooms = function(){
 			return true;
 		}
 	}
-	
+
+    //If the room is existing and started, then finish it. Otherwise leave it alone
 	this.EndGame = function(room){ 
 		if( !this.startFlags[room] ){ 
 			return false;
@@ -121,7 +131,7 @@ var gamerooms = function(){
 			return true;
 		}
 	}
-	
+	//Return statistics on the room.
 	this.RoomStats = function( room ){ 
 		var statData = { 
 			'roomId': room,
@@ -131,44 +141,62 @@ var gamerooms = function(){
 		};
 		return statData;
 	}
-	
+
+    //Find the room that a certain player is in.
 	this.GetRoom = function(player){ 
 		var room = this.players[player]['roomId'];
 		return room;
 	}
-	
+
+    //Place a player into a room.
 	this.JoinRoom = function(player, room){ 
 		var aRoom;
+
+        //If a player is in a room, make him leave first.
 		if( this.players[player] != undefined ){ 
 			this.LeaveRoom( player );
 		}
-		
+        //If no room is entered, just use the first open room available
 		if(room == undefined )
 			aRoom = this.FirstOpenRoom;
 		else
 			aRoom = room;
-		
+
+        //Lazy initialize the room. Set it as open and not started
 		if( this.rooms[aRoom] == undefined ){
 			this.rooms[aRoom] = [];	
 			this.startFlags[aRoom] = false;
 		}
+
+       //If the room is full though, put the player in a better one.
 		if(this.rooms[aRoom].length == maxPerRoom)
 			aRoom = this.FirstOpenRoom;
-			
+
+        //After everything is checked out alright, finally put the player into a room.
 		this.rooms[aRoom].push( player );
+
+        //Mark the player as being put in a room as well. Let him know which room and which number he is.
 		this.players[player] = { 'roomId': aRoom, 'number': this.rooms[aRoom].length-1 };
-		
+
+        //If the room is full then be nice and create a new room.
 		if(this.rooms[aRoom].length == maxPerRoom){ 
 			this.CreateNewRoom();
 		}	
 	}
-	
-	this.Initialize = function(){ 
-		this.rooms[1] = [];
-		this.FirstOpenRoom = 1;
-		this.NextRoomId = 2;
-	}
-	
+    //Take the player and remove him from the room.
+    this.LeaveRoom = function(player){
+    		if( this.players[player] == undefined )
+    			return false;
+    		var room = this.players[player]['roomId'];
+    		var number = this.players[player]['number'];
+    		this.rooms[room].splice( number, 1 );
+    		this.players[player] = undefined;
+    		if( this.startFlags[room] == false )
+    			this.FirstOpenRoom = room;
+    		return room;
+    	}
+
+    //A new room is open, set it as the first open room.
 	this.CreateNewRoom = function(){ 
 		this.FirstOpenRoom = this.NextRoomId;
 		this.rooms[this.FirstOpenRoom] = [];
@@ -176,17 +204,7 @@ var gamerooms = function(){
 		this.NextRoomId += 1;
 	}
 	
-	this.LeaveRoom = function(player){ 
-		if( this.players[player] == undefined )
-			return false;
-		var room = this.players[player]['roomId'];
-		var number = this.players[player]['number'];
-		this.rooms[room].splice( number, 1 );
-		this.players[player] = undefined;
-		if( this.startFlags[room] == false )
-			this.FirstOpenRoom = room;
-		return room;
-	}
+
 }
 
 var myrooms = new gamerooms();
@@ -197,18 +215,21 @@ myrooms.Initialize();
 ****************************/
 // Initialize the socket connection
 io.sockets.on('connection', function(socket){
-	console.log('connection to server confirmed');
-	socket.emit( 'connection', socket.id );
+    //player id will be the id of the socket
+    //This is just for clarity
+    playerId = socket.id
+
+    console.log('connection to server confirmed, Player id is ' + playerId);
+	socket.emit( 'connection', playerId );
 		
 	socket.on("disconnect", function(){ 
-		var oldChan = mychannels.LeaveChannel( socket.id );
-		var oldRoom = myrooms.LeaveRoom( socket.id );
-		
+		var oldRoom = myrooms.LeaveRoom( playerId );
+		 console.log("Disconnecting from room");
 		var data, statData;
 		// When we're still in a room
 		if( oldRoom ){ 
 			data = { 
-				'sessionId': socket.id,
+				'sessionId': playerId,
 				'roomId': oldRoom
 			};
 			// Let people know we've left
@@ -223,24 +244,6 @@ io.sockets.on('connection', function(socket){
 			// Leave the socket
 			socket.leave( "room#" + oldRoom );
 		}
-		// When we're in a channel
-		if( oldChan ){ 
-			data = { 
-				'sessionId': socket.id,
-				'channelId': oldChan
-			};
-			// Let people know we've left
-			socket.broadcast.to( "chan@" + oldChan ).emit( "left channel down", data );
-			socket.emit( "left channel down", data );
-			
-			// Refresh the channel stats
-			statData = mychannels.ChannelStats(oldChan);
-			socket.broadcast.to( "chan@" + oldChan ).emit( "channel stat down", statData );
-			socket.emit( "channel stat down", statData );
-			
-			// Leave the socket
-			socket.leave( "chan@" + oldChan );
-		}
 	});
 
 
@@ -250,25 +253,25 @@ io.sockets.on('connection', function(socket){
 	// join room
 	socket.on( "join room up", function( room ){
 		// Step 0: Leave the current room (if we're in one)
-        console.log("Leaving room");
-		var oldRoom = myrooms.LeaveRoom( socket.id );
+		var oldRoom = myrooms.LeaveRoom( playerId );
 		if( oldRoom ){
-			var departureData = { 'sessionId': socket.id };
+            console.log("Leaving room");
+			var departureData = { 'sessionId': playerId };
 			socket.broadcast.to( "room#" + oldRoom ).emit( "left room down", departureData );
 			socket.emit( "left room down", departureData );
 		}
 
         console.log("joining room");
 		// Step 1: Join the room in the model
-		myrooms.JoinRoom( socket.id, room );
+		myrooms.JoinRoom( playerId, room );
 		
 		// Step 2: Join the room over socket
-		var theRoom = myrooms.GetRoom( socket.id );
+		var theRoom = myrooms.GetRoom( playerId );
 		socket.join( "room#" + theRoom );
 		
 		// Step 3: Announce to the world
 		var outPut = { 
-			'sessionId': socket.id,
+			'sessionId': playerId,
 			'roomId': theRoom
 		};
 		socket.broadcast.to( "room#" + theRoom ).emit( "join room down", outPut );
@@ -283,10 +286,13 @@ io.sockets.on('connection', function(socket){
 	} );
 	
 	// leaving room
-	socket.on( "leave room up", function( data ){ 
-		var oldRoom = myrooms.LeaveRoom( socket.id );
+	socket.on( "leave room up", function( data ){
+        console.log(playerId +" leaving room");
+
+        //Have the player leave the room.
+		var oldRoom = myrooms.LeaveRoom(playerId );
 		if( oldRoom ){
-			var departureData = { 'sessionId': socket.id };
+			var departureData = { 'sessionId': playerId };
 			socket.broadcast.to( "room#" + oldRoom ).emit( "left room down", departureData );
 			socket.emit( "left room down", departureData );
 		}
