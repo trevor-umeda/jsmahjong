@@ -4,8 +4,6 @@
     <list default="true" id="8117e85d-f98c-479b-9af0-d7cd778b9827" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/client.js" afterPath="$PROJECT_DIR$/public/javascripts/client.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/mahjong-drive.js" afterPath="$PROJECT_DIR$/public/javascripts/mahjong-drive.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/mahjong/game.js" afterPath="$PROJECT_DIR$/public/javascripts/mahjong/game.js" />
     </list>
     <ignored path="mahjong.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -27,10 +25,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="app.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="app.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="13" selection-start="1006" selection-end="1006" vertical-scroll-proportion="8.653846">
+            <state line="245" column="0" selection-start="6372" selection-end="6372" vertical-scroll-proportion="-1.7140077">
               <folding />
             </state>
           </provider>
@@ -48,7 +46,7 @@
       <file leaf-file-name="client.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/javascripts/client.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="203" column="28" selection-start="5579" selection-end="5579" vertical-scroll-proportion="364.6154">
+            <state line="215" column="0" selection-start="5854" selection-end="5854" vertical-scroll-proportion="-44.423077">
               <folding />
             </state>
           </provider>
@@ -57,16 +55,16 @@
       <file leaf-file-name="mahjong-drive.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/javascripts/mahjong-drive.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="25" selection-start="1007" selection-end="1007" vertical-scroll-proportion="-13.846154">
+            <state line="35" column="25" selection-start="1007" selection-end="1007" vertical-scroll-proportion="-20.192308">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="game.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="game.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/javascripts/mahjong/game.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="188" column="33" selection-start="5743" selection-end="5743" vertical-scroll-proportion="0.11111111">
+            <state line="188" column="33" selection-start="5743" selection-end="5743" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -96,10 +94,10 @@
       <list>
         <option value="$PROJECT_DIR$/public/javascripts/views/mahjong.jade" />
         <option value="$PROJECT_DIR$/views/mahjong.jade" />
-        <option value="$PROJECT_DIR$/public/javascripts/client.js" />
-        <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/public/javascripts/mahjong-drive.js" />
         <option value="$PROJECT_DIR$/public/javascripts/mahjong/game.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/client.js" />
+        <option value="$PROJECT_DIR$/app.js" />
       </list>
     </option>
   </component>
@@ -156,74 +154,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="mahjong" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mahjong" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mahjong" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mahjong" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mahjong" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mahjong" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mahjong" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mahjong" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="javascripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mahjong" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mahjong" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="javascripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="mahjong" />
@@ -410,23 +340,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/v5debug.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.42694497">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="13" selection-start="1006" selection-end="1006" vertical-scroll-proportion="8.653846">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/clientv2.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/client.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="215" column="0" selection-start="5854" selection-end="5854" vertical-scroll-proportion="-44.423077">
           <folding />
         </state>
       </provider>
@@ -438,23 +361,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/client.js">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/mahjong-drive.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="203" column="28" selection-start="5579" selection-end="5579" vertical-scroll-proportion="364.6154">
+        <state line="35" column="25" selection-start="1007" selection-end="1007" vertical-scroll-proportion="-20.192308">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/mahjong-drive.js">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/v5debug.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="25" selection-start="1007" selection-end="1007" vertical-scroll-proportion="-13.846154">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/mahjong/game.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="188" column="33" selection-start="5743" selection-end="5743" vertical-scroll-proportion="0.11111111">
+        <state line="188" column="33" selection-start="5743" selection-end="5743" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="245" column="0" selection-start="6372" selection-end="6372" vertical-scroll-proportion="-1.7140077">
           <folding />
         </state>
       </provider>
