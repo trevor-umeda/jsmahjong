@@ -284,7 +284,7 @@ socket.on("connection down",function(rooms){
      roomList = rooms;
     console.log(roomList);
     console.log("unmasking");
-    $("#dialog").parent().unmask();
+    $("body").unmask();
 
     $("#dialog").dialog();
     for(var room in rooms){

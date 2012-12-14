@@ -21,7 +21,7 @@ $(function(){
 	var me = new faggot();
 	me.dostuff();
 */
-    $("#dialog").parent().mask("Loading...");
+    $("body").mask("Loading. Please be patient...");
     console.log("masking");
 	$("#playground").playground( { width: GAME_WIDTH,  height: GAME_HEIGHT } );
 	
