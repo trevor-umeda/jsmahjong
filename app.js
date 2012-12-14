@@ -304,7 +304,7 @@ io.sockets.on('connection', function(socket){
 		
 		// Step 4: Inform with channel stats also
 		var statData = myrooms.RoomStats(theRoom);
-		socket.broadcast.to( "room#" + theRoom ).emit( "room stat down", statData );
+		socket.broadcast.to( "room#" + theRoom ).emit( "room stat down", statData);
 		socket.emit( "room stat down", statData );
 
 	} );
@@ -321,7 +321,10 @@ io.sockets.on('connection', function(socket){
 			socket.emit( "left room down", departureData );
 		}
 	} );
-	
+	socket.on("refresh up", function(data){
+        socket.emit( "refresh down", myrooms.getRoomsList() );
+
+    });
 	// game event
 	socket.on( "game event up", function(data){ 
 		var middle = { 

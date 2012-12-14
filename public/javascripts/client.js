@@ -87,9 +87,9 @@ var tooltip = function(){
 * Game Client API Code  *
 ***********************/
 // Replace this code with the below for testing use
-//var socket = io.connect('http://localhost');
+var socket = io.connect('http://localhost');
 // The following should be used in production mode
-var socket = io.connect("http://jsmahjong.herokuapp.com");
+//var socket = io.connect("http://jsmahjong.herokuapp.com");
 var sessionId;
 
 //On connection. The client will remember his socketId or his unique player Id.
@@ -293,7 +293,7 @@ socket.on("connection down",function(rooms){
            option.attr("data-format",room);
            option.text("Room " + room + " " + rooms[room].length + "/4");
            $("#dialog #roomoptions").append(option);
-       }
+    }
 });
 function RoomSelection(){
 //    alert($("#roomoptions").val());
@@ -303,6 +303,22 @@ function RoomSelection(){
     else JoinRoom($("#roomoptions").val());
    $("#dialog").dialog("close");
 }
+function requestRefresh(){
+    socket.emit("refresh up");
+}
+socket.on("refresh down", function(rooms){
+    if($(".ui-dialog").css('display') !==  'none'){
+            document.getElementById("roomoptions").options.length = 0;
+                    $("#dialog").dialog();
+                    for(var room in rooms){
+                          var option = $("<option></option>");
+                          option.val(room);
+                          option.attr("data-format",room);
+                          option.text("Room " + room + " " + rooms[room].length + "/4");
+                          $("#dialog #roomoptions").append(option);
+                        }
+        }
+});
 socket.on( "join room down", function( roomdata ){
 	currentRoom = roomdata['roomId'];
 	var handlers = gameFunctionHandlers['join room down'];
@@ -320,7 +336,7 @@ socket.on( "left room down", function( data ){
 	}
 } );
 
-socket.on( "room stat down", function( data ){ 
+socket.on( "room stat down", function( data,rooms ){
 	var handlers = gameFunctionHandlers['room stat down'];
 	for(var x in handlers ){ 
 		handlers[x](data);
