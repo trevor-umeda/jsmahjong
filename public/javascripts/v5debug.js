@@ -22,7 +22,7 @@ $(function(){
 	me.dostuff();
 */
     $("body").mask("Loading. Please be patient...");
-    console.log("masking");
+
 	$("#playground").playground( { width: GAME_WIDTH,  height: GAME_HEIGHT } );
 	
 	$.playground().startGame(function(){
