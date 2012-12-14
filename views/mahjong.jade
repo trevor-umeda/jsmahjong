@@ -1,4 +1,5 @@
 script(type = 'text/javascript', src="javascripts/jquery/jquery.js" )
+script(type = 'text/javascript', src="javascripts/jquery/jquery-ui-1.8.21.custom.min.js")
 script(type = 'text/javascript', src='socket.io/socket.io.js' )
 script(type = "text/javascript", src="javascripts/client.js" )
 
@@ -24,12 +25,16 @@ script(type = "text/javascript", src="javascripts/mahjong/tiles.js" )
 script(type = "text/javascript", src="javascripts/mahjong-drive.js")
 script(type = "text/javascript", src="javascripts/v5debug.js")
 link(href="/stylesheets/extensions.css", media="screen", rel="stylesheet", type="text/css")
+link(href="/stylesheets/ui-lightness/jquery-ui-1.8.21.custom.css", media="screen", rel="stylesheet", type="text/css")
+
 
 h1= title
 #UI
-	button#joingame Join Game
-	button#quitgame Quit Game
+    button#joingame Join Game
+    button#quitgame Quit Game
+#dialog
 
+    select(id="roomoptions")
+    #joinroom
+    button(type="submit",onclick="something()") Submit
 #playground
-
-

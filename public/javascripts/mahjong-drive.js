@@ -122,12 +122,9 @@ AddGameFunction( "join room down", function(data){
 		$("#joingame").hide();
 		$("#quitgame").show();
 		//game.playerJoined();
-        console.log("wtf");
 	}
 	else
 		$("#chat").append( "<p>" + data['sessionId'] + " has joined " + data['roomId'] + "</p>" );
-    console.log("EVENMOREWTF");
-		
 } );
 
 AddGameFunction( "left room down", function(data){

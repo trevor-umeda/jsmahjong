@@ -209,7 +209,15 @@ var gamerooms = function(){
 		this.NextRoomId += 1;
 	}
     //provide a copy of the rooms list. If we send to clients, don't want them to mess with real copy though.
-
+    this.getRoomsList = function(){
+        roomsList = {};
+        for(var room in this.rooms){
+            if(!this.startFlags[room]){
+                roomsList[room] = this.rooms[room];
+            }
+        }
+        return roomsList;
+    }
 }
 
 var myrooms = new gamerooms();
@@ -230,7 +238,7 @@ io.sockets.on('connection', function(socket){
     console.log('connection to server confirmed, Player id is ' + socket.id);
 	socket.emit( 'connection', socket.id );
 
-    //socket.emit('connection down',myrooms.getRoomsList());
+    socket.emit('connection down',myrooms.getRoomsList());
     //Once this player disconnects.
 	socket.on("disconnect", function(){
         //Remove the player from his room
@@ -269,7 +277,7 @@ io.sockets.on('connection', function(socket){
 	// join room
 	socket.on( "join room up", function( room ){
 		// Step 0: Leave the current room (if we're in one)
-		var oldRoom = myrooms.LeaveRoom( socket.id );
+		var oldRoom = myrooms.LeaveRoom( socket.id);
 		if( oldRoom ){
             console.log("Leaving room");
 			var departureData = { 'sessionId': socket.id };

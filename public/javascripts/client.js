@@ -265,6 +265,7 @@ socket.on( "channel stat down", function( data ){
 
 //Socket IO communication. These are for sending messages up to the server about joining or leaving.
 function JoinRoom( room ){
+    console.log(room);
 	socket.emit( "join room up", room, function( result ){
 		playerState = STATE_INGAME;
 	} );
@@ -280,10 +281,25 @@ function LeaveRoom( room ){
 }
 
 //Socket io listeners. If we receive info from the server, handle it here.
-//socket.on("connection down",function(rooms){
-//     roomList = rooms;
-//     console.log(roomList);
-//});
+socket.on("connection down",function(rooms){
+     roomList = rooms;
+    console.log(roomList);
+
+    $("#dialog").dialog();
+    for(var room in rooms){
+           var option = $("<option></option>");
+           option.val(room);
+           option.attr("data-format",room);
+           option.text("Room " + room);
+           $("#dialog #roomoptions").append(option);
+        console.log(option);
+       }
+});
+function something(){
+//    alert($("#roomoptions").val());
+    JoinRoom($("#roomoptions").val());
+   $("#dialog").dialog("close");
+}
 socket.on( "join room down", function( roomdata ){
 	currentRoom = roomdata['roomId'];
 	var handlers = gameFunctionHandlers['join room down'];
