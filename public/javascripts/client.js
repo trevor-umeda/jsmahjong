@@ -89,7 +89,7 @@ var tooltip = function(){
 // Replace this code with the below for testing use
 //var socket = io.connect('http://localhost');
 // The following should be used in production mode
- var socket = io.connect("http://limitless-wildwood-9847.herokuapp.com");
+ var socket = io.connect("http://jsmahjong.herokuapp.com");
 var sessionId;
 
 //On connection. The client will remember his socketId or his unique player Id.
