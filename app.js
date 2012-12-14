@@ -81,11 +81,7 @@ console.log("Express server listening on port %d in %s mode", app.address().port
 console.log("Test");
 app.get('/', function(req, res){
 	var ip = req.connection.remoteAddress;
-	var betaflag = ABTestManager.AddUser(ip);
-	if( betaflag )
-		res.render("index.jade", { title: "stuff", content: "nothing yet" } );
-	else
-		res.render("indexbeta.jade", { title : "stuff", content: "nothing yet" } );
+	res.render("mahjong.jade", { title : "Mahjong", content: "nothing yet" } );
 }); // end app.get
 
 
