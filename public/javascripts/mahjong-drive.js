@@ -116,15 +116,17 @@ AddGameFunction( "initial sync", function( origin, eventdata ){
 * Game Server Events Down *
 ***************************/
 
-AddGameFunction( "join room down", function(data){ 
+AddGameFunction( "join room down", function(data){
 	if( data['sessionId'] == sessionId ){
 		$("#chat").append( "<p>you have joined " + data['roomId'] + "</p>" );
 		$("#joingame").hide();
 		$("#quitgame").show();
 		//game.playerJoined();
+        console.log("wtf");
 	}
 	else
-		$("#chat").append( "<p>" + data['sessionId'] + " has joined " + data['roomId'] + "</p>" );		
+		$("#chat").append( "<p>" + data['sessionId'] + " has joined " + data['roomId'] + "</p>" );
+    console.log("EVENMOREWTF");
 		
 } );
 
@@ -137,7 +139,6 @@ AddGameFunction( "left room down", function(data){
 	else
 		$("#chat").append( "<p>" + data['sessionId'] + " has left " + data['roomId'] + "</p>" );
 	
-	// TODO: handle the case when we're midgame and some faggot leaves
 } );
 
 AddGameFunction( "room stat down", function(data){ 

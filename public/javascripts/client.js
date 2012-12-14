@@ -92,7 +92,7 @@ var socket = io.connect('http://localhost');
  //var socket = io.connect("http://crunchymall.com");
 var sessionId;
 
-
+//On connection. The client will remember his socketId or his unique player Id.
 socket.on( "connection", function(id){ 
 	sessionId = id;
 });
@@ -220,6 +220,10 @@ socket.on( "player login down", function(data) {
 // channels are for the purpose of pre-game chat
 // player can be the player token or ip address.
 // if no channel is specified, the server decides where to put the player
+
+//Currently this section is not in use.
+
+
 function JoinChannel( channel ){ 
 	socket.emit( "join channel up", channel, function( result ){ 
 		// TODO: write a function to let the player know he has joined a new room
@@ -254,13 +258,15 @@ socket.on( "channel stat down", function( data ){
 /**********************
 * Gameroom functions     *
 **********************/
+
 // Game rooms (just rooms) are where games happen and exist in the during-game
 // player can be the token or the ip address.
 // if no roomid is specified, the server puts the player into the a game randomly
+
+//Socket IO communication. These are for sending messages up to the server about joining or leaving.
 function JoinRoom( room ){
 	socket.emit( "join room up", room, function( result ){
-		// TODO: write me!
-		playerState = STATE_INGAME;		
+		playerState = STATE_INGAME;
 	} );
 }
 
@@ -273,8 +279,12 @@ function LeaveRoom( room ){
 	socket.emit( "left room up", { 'sessionId': sessionId, 'roomId': aRoom } );
 }
 
+//Socket io listeners. If we receive info from the server, handle it here.
+//socket.on("connection down",function(rooms){
+//     roomList = rooms;
+//     console.log(roomList);
+//});
 socket.on( "join room down", function( roomdata ){
-	// TODO: let the player know he has joined a game
 	currentRoom = roomdata['roomId'];
 	var handlers = gameFunctionHandlers['join room down'];
 	for( var x in handlers ){ 
@@ -322,6 +332,8 @@ socket.on( "chat down", function( event ){
 * Game functions            *
 **********************/
 // if no receiver is specified, the message is delivered to every player in the game room
+
+//Send communcation to the server.
 function FireEvent( name, event ){ 
 	var middle =  { 
 		'sessionId': sessionId, 
@@ -330,7 +342,6 @@ function FireEvent( name, event ){
 		'roomId': currentRoom
 	};
 	socket.emit( "game event up", middle, function( result ){ 
-		// TODO: write me!
 		socket.emit( "sync up", syncPercentDeviation);
 	} );
 }
@@ -344,6 +355,7 @@ function StartGame( room ){
 	socket.emit( 'start game up', middle );
 }
 
+//Receive info from the server.
 socket.on( "start game down", function( data ){ 
 	var handlers = gameFunctionHandlers['start game down'];
 	for( var x in handlers ){ 

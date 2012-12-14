@@ -95,7 +95,9 @@ app.get( "/mahjong", function(req, res){
 /****************************
 * Room Models                               *
 *****************************/
+
 //The concept and logic for a game room is contained here.
+
 var gamerooms = function(){ 
 	this.rooms = {};
 	this.players = {};
@@ -181,14 +183,17 @@ var gamerooms = function(){
         //If the room is full then be nice and create a new room.
 		if(this.rooms[aRoom].length == maxPerRoom){ 
 			this.CreateNewRoom();
-		}	
+		}
+
 	}
     //Take the player and remove him from the room.
     this.LeaveRoom = function(player){
     		if( this.players[player] == undefined )
     			return false;
+        //Find which room the player was in and which number he was.
     		var room = this.players[player]['roomId'];
     		var number = this.players[player]['number'];
+        //Remove the player from the room.
     		this.rooms[room].splice( number, 1 );
     		this.players[player] = undefined;
     		if( this.startFlags[room] == false )
@@ -203,7 +208,7 @@ var gamerooms = function(){
 		this.startFlags[this.FirstOpenRoom] = false;
 		this.NextRoomId += 1;
 	}
-	
+    //provide a copy of the rooms list. If we send to clients, don't want them to mess with real copy though.
 
 }
 
@@ -213,25 +218,32 @@ myrooms.Initialize();
 /****************************
 * Socket IO Response Server *
 ****************************/
+
+//The interaction between client and server is handled here.
+
 // Initialize the socket connection
 io.sockets.on('connection', function(socket){
     //player id will be the id of the socket
     //This is just for clarity
-    playerId = socket.id
 
-    console.log('connection to server confirmed, Player id is ' + playerId);
-	socket.emit( 'connection', playerId );
-		
-	socket.on("disconnect", function(){ 
-		var oldRoom = myrooms.LeaveRoom( playerId );
-		 console.log("Disconnecting from room");
+
+    console.log('connection to server confirmed, Player id is ' + socket.id);
+	socket.emit( 'connection', socket.id );
+
+    //socket.emit('connection down',myrooms.getRoomsList());
+    //Once this player disconnects.
+	socket.on("disconnect", function(){
+        //Remove the player from his room
+		var oldRoom = myrooms.LeaveRoom( socket.id );
+        console.log("Player id " + socket.id + " Disconnecting from room");
+
 		var data, statData;
 		// When we're still in a room
-		if( oldRoom ){ 
+		if( oldRoom ){
 			data = { 
-				'sessionId': playerId,
+				'sessionId': socket.id,
 				'roomId': oldRoom
-			};
+		    };
 			// Let people know we've left
 			socket.broadcast.to( "room#" + oldRoom ).emit( "left room down", data );
 			socket.emit( "left room down", data );
@@ -250,28 +262,32 @@ io.sockets.on('connection', function(socket){
 	/****************************
 	* Game Server Response          *
 	****************************/
+
+    //Player actions are handled here
+    //Actions include players joining, leaving, joining games, and performing game actions.
+
 	// join room
 	socket.on( "join room up", function( room ){
 		// Step 0: Leave the current room (if we're in one)
-		var oldRoom = myrooms.LeaveRoom( playerId );
+		var oldRoom = myrooms.LeaveRoom( socket.id );
 		if( oldRoom ){
             console.log("Leaving room");
-			var departureData = { 'sessionId': playerId };
+			var departureData = { 'sessionId': socket.id };
 			socket.broadcast.to( "room#" + oldRoom ).emit( "left room down", departureData );
 			socket.emit( "left room down", departureData );
 		}
 
         console.log("joining room");
 		// Step 1: Join the room in the model
-		myrooms.JoinRoom( playerId, room );
+		myrooms.JoinRoom( socket.id, room );
 		
 		// Step 2: Join the room over socket
-		var theRoom = myrooms.GetRoom( playerId );
+		var theRoom = myrooms.GetRoom( socket.id );
 		socket.join( "room#" + theRoom );
 		
 		// Step 3: Announce to the world
 		var outPut = { 
-			'sessionId': playerId,
+			'sessionId': socket.id,
 			'roomId': theRoom
 		};
 		socket.broadcast.to( "room#" + theRoom ).emit( "join room down", outPut );
@@ -281,18 +297,17 @@ io.sockets.on('connection', function(socket){
 		var statData = myrooms.RoomStats(theRoom);
 		socket.broadcast.to( "room#" + theRoom ).emit( "room stat down", statData );
 		socket.emit( "room stat down", statData );
-		
 
 	} );
 	
 	// leaving room
 	socket.on( "leave room up", function( data ){
-        console.log(playerId +" leaving room");
+        console.log(socket.id +" leaving room");
 
         //Have the player leave the room.
-		var oldRoom = myrooms.LeaveRoom(playerId );
+		var oldRoom = myrooms.LeaveRoom(socket.id );
 		if( oldRoom ){
-			var departureData = { 'sessionId': playerId };
+			var departureData = { 'sessionId': socket.id };
 			socket.broadcast.to( "room#" + oldRoom ).emit( "left room down", departureData );
 			socket.emit( "left room down", departureData );
 		}
