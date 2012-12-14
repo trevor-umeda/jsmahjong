@@ -265,7 +265,6 @@ socket.on( "channel stat down", function( data ){
 
 //Socket IO communication. These are for sending messages up to the server about joining or leaving.
 function JoinRoom( room ){
-    console.log(room);
 	socket.emit( "join room up", room, function( result ){
 		playerState = STATE_INGAME;
 	} );
@@ -290,14 +289,16 @@ socket.on("connection down",function(rooms){
            var option = $("<option></option>");
            option.val(room);
            option.attr("data-format",room);
-           option.text("Room " + room);
+           option.text("Room " + room + " " + rooms[room].length + "/4");
            $("#dialog #roomoptions").append(option);
-        console.log(option);
        }
 });
-function something(){
+function RoomSelection(){
 //    alert($("#roomoptions").val());
-    JoinRoom($("#roomoptions").val());
+    if($("#roomname").val() !== ""){
+         JoinRoom($("#roomname").val());
+    }
+    else JoinRoom($("#roomoptions").val());
    $("#dialog").dialog("close");
 }
 socket.on( "join room down", function( roomdata ){

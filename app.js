@@ -135,12 +135,14 @@ var gamerooms = function(){
 	}
 	//Return statistics on the room.
 	this.RoomStats = function( room ){ 
-		var statData = { 
+		if(this.rooms[room]){
+        var statData = {
 			'roomId': room,
 			'population': this.rooms[room].length,
 			'people': this.rooms[room],
 			'started': this.startFlags[room]
 		};
+        }
 		return statData;
 	}
 
@@ -198,6 +200,8 @@ var gamerooms = function(){
     		this.players[player] = undefined;
     		if( this.startFlags[room] == false )
     			this.FirstOpenRoom = room;
+            if(this.rooms[room].length === 0)
+                this.rooms[room] = undefined;
     		return room;
     	}
 
