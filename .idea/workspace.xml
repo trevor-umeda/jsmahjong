@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8117e85d-f98c-479b-9af0-d7cd778b9827" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/client.js" afterPath="$PROJECT_DIR$/public/javascripts/client.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/v5debug.js" afterPath="$PROJECT_DIR$/public/javascripts/v5debug.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/mahjong.jade" afterPath="$PROJECT_DIR$/views/mahjong.jade" />
     </list>
     <ignored path="mahjong.iws" />
@@ -38,16 +38,7 @@
       <file leaf-file-name="client.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/javascripts/client.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="89" column="2" selection-start="2473" selection-end="2473" vertical-scroll-proportion="0.20428015">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="mahjong.jade" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/mahjong.jade">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="34" column="13" selection-start="1945" selection-end="1945" vertical-scroll-proportion="0.0">
+            <state line="91" column="0" selection-start="2569" selection-end="2569" vertical-scroll-proportion="0.37937742">
               <folding />
             </state>
           </provider>
@@ -56,7 +47,16 @@
       <file leaf-file-name="mahjong-drive.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/javascripts/mahjong-drive.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="132" column="119" selection-start="3760" selection-end="3760" vertical-scroll-proportion="-7.5">
+            <state line="132" column="119" selection-start="3760" selection-end="3760" vertical-scroll-proportion="8.076923">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="v5debug.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/v5debug.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="24" column="27" selection-start="668" selection-end="668" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -99,9 +99,9 @@
         <option value="$PROJECT_DIR$/public/javascripts/views/mahjong.jade" />
         <option value="$PROJECT_DIR$/public/javascripts/mahjong/game.js" />
         <option value="$PROJECT_DIR$/public/javascripts/mahjong-drive.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/v5debug.js" />
         <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/views/mahjong.jade" />
+        <option value="$PROJECT_DIR$/public/javascripts/v5debug.js" />
         <option value="$PROJECT_DIR$/public/javascripts/client.js" />
       </list>
     </option>
@@ -163,20 +163,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="mahjong" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mahjong" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mahjong" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -406,20 +392,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/mahjong-drive.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="132" column="119" selection-start="3760" selection-end="3760" vertical-scroll-proportion="-7.5">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/v5debug.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="0" selection-start="595" selection-end="595" vertical-scroll-proportion="0.48387095">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/mahjong.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
@@ -436,14 +408,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/mahjong.jade">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="13" selection-start="1945" selection-end="1945" vertical-scroll-proportion="0.0">
+        <state line="30" column="96" selection-start="2031" selection-end="2031" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/mahjong-drive.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="132" column="119" selection-start="3760" selection-end="3760" vertical-scroll-proportion="8.076923">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/v5debug.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="27" selection-start="668" selection-end="668" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/client.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="89" column="2" selection-start="2473" selection-end="2473" vertical-scroll-proportion="0.20428015">
+        <state line="91" column="0" selection-start="2569" selection-end="2569" vertical-scroll-proportion="0.37937742">
           <folding />
         </state>
       </provider>

@@ -283,6 +283,8 @@ function LeaveRoom( room ){
 socket.on("connection down",function(rooms){
      roomList = rooms;
     console.log(roomList);
+    console.log("unmasking");
+    $("#dialog").parent().unmask();
 
     $("#dialog").dialog();
     for(var room in rooms){
