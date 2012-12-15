@@ -88,7 +88,10 @@ app.get('/', function(req, res){
 app.get( "/mahjong", function(req, res){ 
 	res.render("mahjong.jade", { title: "Mahjong" } );
 } );
-
+io.configure(function () {
+  io.set("transports", ["xhr-polling"]);
+  io.set("polling duration", 10);
+});
 /****************************
 * Room Models                               *
 *****************************/
@@ -244,7 +247,7 @@ io.sockets.on('connection', function(socket){
 	socket.on("disconnect", function(){
         //Remove the player from his room
 		var oldRoom = myrooms.LeaveRoom( socket.id );
-        console.log("Player id " + socket.id + " Disconnecting from room");
+        console.log("Player id " + socket.id + " Disconnecting from room " +oldRoom);
 
 		var data, statData;
 		// When we're still in a room
