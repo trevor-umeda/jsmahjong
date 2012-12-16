@@ -21,7 +21,17 @@ $(function(){
 	var me = new faggot();
 	me.dostuff();
 */
+   $('#sidebar').css('margin-left',($('body').outerWidth()-20));
+
     $("body").mask("Loading. Please be patient...");
+    $("h2").click(function () {
+         var slider = $('#sidebar');
+            slider.animate({
+              marginLeft: parseInt(slider.css('margin-left'),10) == ($('body').outerWidth() - 190) ?
+                  ($('body').outerWidth()-20) :($('body').outerWidth() - 190)
+
+            });
+           });
 
 	$("#playground").playground( { width: GAME_WIDTH,  height: GAME_HEIGHT } );
 	

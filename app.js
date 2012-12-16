@@ -88,6 +88,7 @@ app.get('/', function(req, res){
 app.get( "/mahjong", function(req, res){ 
 	res.render("mahjong.jade", { title: "Mahjong" } );
 } );
+
 io.configure(function () {
   io.set("transports", ["xhr-polling"]);
   io.set("polling duration", 10);
@@ -327,6 +328,11 @@ io.sockets.on('connection', function(socket){
 	socket.on("refresh up", function(data){
         socket.emit( "refresh down", myrooms.getRoomsList() );
 
+    });
+    socket.on("chat up", function(data){
+            var theRoom = myrooms.GetRoom( socket.id );
+            socket.broadcast.to( "room#" + theRoom ).emit( "chat down",socket.id, data["message"]);
+        	socket.emit( "chat down", socket.id,data["message"] );
     });
 	// game event
 	socket.on( "game event up", function(data){ 

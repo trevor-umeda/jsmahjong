@@ -41,4 +41,9 @@ h1= title
     #joinroom
     button(type="submit",onclick="RoomSelection()") Select
     button(onclick="requestRefresh()") Refresh
+#sidebar(style="height:400px; position:absolute;width:300px; border: 1px black")
+    h2 Chat Window
+    #chat
+    input(type="text",id="chatbox")
+    button(type="submit",onclick="SendChat()") Send
 #playground

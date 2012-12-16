@@ -303,6 +303,11 @@ function RoomSelection(){
     else JoinRoom($("#roomoptions").val());
    $("#dialog").dialog("close");
 }
+function SendChat(){
+    PlayerChat($("#chatbox").val());
+    $("#chatbox").val("");
+}
+
 function requestRefresh(){
     socket.emit("refresh up");
 }
@@ -348,18 +353,14 @@ socket.on( "room stat down", function( data,rooms ){
 **********************/
 // if no receiver is specified, the message is delivered to the channel or room the player is in
 function PlayerChat( message ){ 
-	socket.emit( "chat up", { 'sessionId': sessionId, 'message': message, 'channelId': currentChannel } );
+	socket.emit( "chat up", { 'sessionId': sessionId, 'message': message} );
 }
 
 
 
-socket.on( "chat down", function( event ){ 
-	// TODO: Write a function 
-	// alert(chatFunctionHandlers);
-	var handlers = chatFunctionHandlers['chat down'];
-	for( var x in handlers ){ 
-		handlers[x](event);
-	}
+socket.on( "chat down", function( username,data ){
+    $('#chat').append('<b>'+'Player ' + parseInt(playerVec.indexOf(username)+1) + ':</b> ' + data + '<br>');
+
 });
 
 
