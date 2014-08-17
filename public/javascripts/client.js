@@ -87,9 +87,9 @@ var tooltip = function(){
 * Game Client API Code  *
 ***********************/
 // Replace this code with the below for testing use
-//var socket = io.connect('http://localhost');
+var socket = io.connect('http://localhost');
 // The following should be used in production mode
-var socket = io.connect("http://jsmahjong.herokuapp.com");
+//var socket = io.connect("http://jsmahjong.herokuapp.com");
 var sessionId;
 
 //On connection. The client will remember his socketId or his unique player Id.
